@@ -10,7 +10,13 @@ const nextConfig = {
 
     return config;
   },
-  // Add env { API_KEY: process.env.API_KEY}
+  env: {
+    OPENAI_API_KEY: process.env.OPENAI_API_KEY,
+    SERPAPI_API_KEY: process.env.SERPAPI_API_KEY, // google search api https://serpapi.com/
+    PINECON_API_KEY: process.env.PINECON_API_KEY, // index db https://app.pinecone.io/
+    PINECON_ENV: process.env.PINECON_ENV,
+    PINECON_INDEX: process.env.PINECON_INDEX,
+  },
 };
 
 module.exports = nextConfig;
