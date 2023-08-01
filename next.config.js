@@ -16,6 +16,7 @@ const nextConfig = {
     PINECON_API_KEY: process.env.PINECON_API_KEY, // index db https://app.pinecone.io/
     PINECON_ENV: process.env.PINECON_ENV,
     PINECON_INDEX: process.env.PINECON_INDEX,
+    GOOGLE_API_KEY: process.env.GOOGLE_API_KEY,
   },
 };
 
