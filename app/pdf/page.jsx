@@ -29,22 +29,26 @@ const PDFLoader = () => {
 
   // This function handles the submission of the form when the user hits 'Enter' or 'Submit'
   // It sends a GET request to the provided endpoint with the current prompt as the query
-  const handleSubmit = async (endpoint) => {
+  const handleUploading = async (endpoint) => {
     try {
+      console.log("insid onClick of upload file");
+
       console.log(`sending ${prompt}`);
       console.log(`using ${endpoint}`);
 
       // A GET request is sent to the backend
-      const response = await fetch(`/api/${endpoint}`, {
+      const response = await fetch(`/api/pdf-upload`, {
         method: "GET",
       });
+
+      console.log(`response ${response}`);
 
       // The response from the backend is parsed as JSON
       const searchRes = await response.json();
       console.log(searchRes);
       setError(""); // Clear any existing error messages
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
       setError(error.message);
     }
   };
@@ -120,7 +124,7 @@ const PDFLoader = () => {
                 className="Button"
               /> */}
               <Button
-                handleSubmit={handleSubmit}
+                handleSubmit={handleUploading}
                 endpoint="pdf-upload"
                 buttonText="Upload Book 📚"
                 className="Button"

@@ -1,5 +1,5 @@
-// start here
 "use client";
+
 import React, { useState } from "react";
 import PageHeader from "../components/PageHeader";
 import PromptBox from "../components/PromptBox";
