@@ -25,6 +25,7 @@ const ResumeReader = () => {
   const handlePromptChange = (e) => {
     setPrompt(e.target.value);
   };
+
   const handleSubmitUpload = async () => {
     try {
       // Push the response into the messages array

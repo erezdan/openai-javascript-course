@@ -17,6 +17,8 @@ const nextConfig = {
     PINECON_ENV: process.env.PINECON_ENV,
     PINECON_INDEX: process.env.PINECON_INDEX,
     GOOGLE_API_KEY: process.env.GOOGLE_API_KEY,
+    SUPABASE_PRIVATE_KEY: process.SUPABASE_PRIVATE_KEY,
+    SUPABASE_URL: process.env.SUPABASE_URL,
   },
 };
 

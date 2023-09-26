@@ -14,7 +14,42 @@ import { PromptTemplate } from "langchain/prompts";
 
 export default async function handler(req, res) {
   try {
-    //    do stuff
+    const { prompt } = req.body;
+
+    // upload the reducedDocs to Pinecone
+    const client = new PineconeClient();
+    await client.init({
+      apiKey: process.env.PINECONE_API_KEY,
+      environment: process.env.PINECONE_ENVIRONMENT,
+    });
+
+    const pineconeIndex = client.Index(process.env.PINECONE_INDEX);
+
+    const vectorStore = await PineconeStore.fromExistingIndex(
+      new OpenAIEmbeddings(),
+      { pineconeIndex }
+    );
+
+    // create Vector DBQA chain
+    const model = new OpenAI();
+    const chain = VectorDBQAChain.fromLLM(model, vectorStore, {
+      k: 2,
+      returnSourceDocuments: true,
+    });
+
+    // prompt template
+    const promptTemplate = new PromptTemplate({
+      template: `Assume you are a Human Resources Director. According to the resumes, answer this question: {question}`,
+      inputVariables: ["question"],
+    });
+
+    const formattedPrompt = await promptTemplate.format({ question: prompt });
+
+    //console.log({ formattedPrompt });
+
+    const response = await chain.call({ query: formattedPrompt });
+
+    console.log({ response });
 
     return res.status(200).json({
       output: response.text,
